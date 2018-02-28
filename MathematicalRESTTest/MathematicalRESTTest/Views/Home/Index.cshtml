@@ -1,0 +1,37 @@
+﻿<script src="~/app/controllers/maths.controller.js"></script>
+<script src="~/app/services/maths.service.js"></script>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Maths REST Test</h2>
+<div ng-controller="mathsController as vm" ng-cloak>
+    <input style="width: 400px;" ng-model="vm.QuestionSet.Id" type="text"/> <button ng-click="vm.GetQuestionSet(vm.QuestionSet.Id)">Get Test</button>
+    <div ng-show="vm.QuestionSetNotFound">
+        Question Set Not Found!
+    </div>
+    <table ng-show="vm.QuestionSet.Questions.length > 0">
+        <tr ng-repeat="question in vm.QuestionSet.Questions track by $index">
+            <td>
+                {{question.FirstNumber}}
+            </td>
+            <td>
+                {{vm.GetOperatorString(question.QuestionType)}}
+            </td>
+            <td>
+                {{question.SecondNumber}}
+            </td>
+            <td>
+                <input ng-model="question.Answer" type="number"/>
+            </td>
+            <td ng-hide="question.QuestionType != 3">
+                Remainder: <input ng-model="question.Remainder" type="number"/>
+            </td>
+            <td ng-hide="question.QuestionState === 1">
+                {{vm.GetQuestionState(question.QuestionState)}}
+            </td>
+        </tr>
+    </table>
+    <button ng-show="vm.QuestionSet.Questions.length > 0" ng-click="vm.ScoreQuestionSet()">Score</button>
+</div>
