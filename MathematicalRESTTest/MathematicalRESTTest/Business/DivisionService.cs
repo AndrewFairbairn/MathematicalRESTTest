@@ -9,7 +9,7 @@ namespace MathematicalRESTTest.Business
     public class DivisionService : IGenerateQuestions
     {
         private readonly Random _randomiser = new Random();
-        public List<Question> GetQuestions(int numberOfQuestions)
+        public List<Question> GenerateQuestions(int numberOfQuestions)
         {
             var questions = new List<Question>();
 

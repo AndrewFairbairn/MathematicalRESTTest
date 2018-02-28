@@ -9,7 +9,7 @@ namespace MathematicalRESTTest.Business
 {
     interface IGenerateQuestions
     {
-        List<Question> GetQuestions(int numberOfQuestions);
+        List<Question> GenerateQuestions(int numberOfQuestions);
         void ScoreQuestions(IEnumerable<Question> questions);
     }
 }

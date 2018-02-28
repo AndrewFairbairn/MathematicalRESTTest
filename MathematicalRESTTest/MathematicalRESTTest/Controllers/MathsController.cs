@@ -26,9 +26,9 @@ namespace MathematicalRESTTest.Controllers
         {
             var questions = new List<Question>();
 
-            questions.AddRange(_multiplicationService.GetQuestions(NumberOfQuestions));
-            questions.AddRange(_divisionService.GetQuestions(NumberOfQuestions));
-            questions.AddRange(_divisionRemainderService.GetQuestions(NumberOfQuestions));
+            questions.AddRange(_multiplicationService.GenerateQuestions(NumberOfQuestions));
+            questions.AddRange(_divisionService.GenerateQuestions(NumberOfQuestions));
+            questions.AddRange(_divisionRemainderService.GenerateQuestions(NumberOfQuestions));
 
             var questionSet = new QuestionSet
             {
@@ -66,6 +66,7 @@ namespace MathematicalRESTTest.Controllers
         {
             _multiplicationService.ScoreQuestions(questionSet.Questions);
             _divisionService.ScoreQuestions(questionSet.Questions);
+            _divisionRemainderService.ScoreQuestions(questionSet.Questions);
 
             _cacheService.AddUpdateQuestionSetInCache(questionSet);
             return Ok(questionSet);
