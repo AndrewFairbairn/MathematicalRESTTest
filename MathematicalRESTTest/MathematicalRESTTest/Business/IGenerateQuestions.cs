@@ -7,7 +7,7 @@ using MathematicalRESTTest.Models;
 
 namespace MathematicalRESTTest.Business
 {
-    interface IGenerateQuestions
+    public interface IGenerateQuestions
     {
         List<Question> GenerateQuestions(int numberOfQuestions);
         void ScoreQuestions(IEnumerable<Question> questions);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.Caching;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -20,16 +21,22 @@ namespace MathematicalRESTTest.Controllers
         private readonly DivisionRemainderService _divisionRemainderService = new DivisionRemainderService();
         private readonly MultiplicationService _multiplicationService = new MultiplicationService();
 
+        private readonly IEnumerable<IGenerateQuestions> _questionServices = from t in Assembly.GetExecutingAssembly().GetTypes()
+            where t.GetInterfaces().Contains(typeof(IGenerateQuestions))
+                  && t.GetConstructor(Type.EmptyTypes) != null
+            select Activator.CreateInstance(t) as IGenerateQuestions;
+
         //GET: api/Maths/
         [ResponseType(typeof(QuestionSet))]
         public IHttpActionResult GetQuestionSet()
         {
             var questions = new List<Question>();
 
-            questions.AddRange(_multiplicationService.GenerateQuestions(NumberOfQuestions));
-            questions.AddRange(_divisionService.GenerateQuestions(NumberOfQuestions));
-            questions.AddRange(_divisionRemainderService.GenerateQuestions(NumberOfQuestions));
-
+            foreach (var service in _questionServices)
+            {
+                questions.AddRange(service.GenerateQuestions(NumberOfQuestions));
+            }
+            
             var questionSet = new QuestionSet
             {
                 Id = Guid.NewGuid().ToString(),
@@ -64,9 +71,10 @@ namespace MathematicalRESTTest.Controllers
         [ResponseType(typeof(QuestionSet))]
         public IHttpActionResult PutquestionSet(QuestionSet questionSet)
         {
-            _multiplicationService.ScoreQuestions(questionSet.Questions);
-            _divisionService.ScoreQuestions(questionSet.Questions);
-            _divisionRemainderService.ScoreQuestions(questionSet.Questions);
+            foreach (var service in _questionServices)
+            {
+                service.ScoreQuestions(questionSet.Questions);
+            }
 
             _cacheService.AddUpdateQuestionSetInCache(questionSet);
             return Ok(questionSet);
