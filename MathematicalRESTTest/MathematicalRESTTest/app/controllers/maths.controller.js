@@ -18,7 +18,14 @@
 
         function getQuestionSet(id) {
             return mathsService.getQuestionSet(id).then(function (response) {
-                vm.QuestionSet = response;
+                if (response == null) {
+                    vm.QuestionSetNotFound = true;
+                    vm.QuestionSet.Questions = null;
+                } else {
+                    vm.QuestionSetNotFound = false;
+                    vm.QuestionSet = response;
+                }
+                
             });
         }
 

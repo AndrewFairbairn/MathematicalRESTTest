@@ -14,6 +14,8 @@
                 return dataService.get("api/maths/" + id)
                     .then(function(result) {
                         return result.data;
+                    }).catch(function activateError(error) {
+                        return null;
                     });
             },
             scoreQuestionSet: function(questionSet) {
