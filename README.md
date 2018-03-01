@@ -13,9 +13,9 @@ A _QuestionSet_ consists of a string __Id__ and a collection of _Question_ objec
 
 A _Question_ object consists of:
 
-*FirstNumber - an integer
-*SecondNumber - an integer
-*Answer - a nullable decimal
-*Remainder - a nullable decimal
-*QuestionState - an enum indication whether the question is NotScored/Correct/Incorrect
-*QuestionType - an enum indicating whether the question is a Multiplication/Division/DivisionWithRemainder
+* FirstNumber - an integer
+* SecondNumber - an integer
+* Answer - a nullable decimal
+* Remainder - a nullable decimal
+* QuestionState - an enum indication whether the question is NotScored/Correct/Incorrect
+* QuestionType - an enum indicating whether the question is a Multiplication/Division/DivisionWithRemainder
