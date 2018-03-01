@@ -56,7 +56,13 @@ namespace MathematicalRESTTest.Tests
             {
                 var createdQuestion = createdQuestionSet.Content.Questions[i];
                 var reloadedQuestion = reloadedQuestionSet.Content.Questions[i];
-                Assert.AreEqual(createdQuestion, reloadedQuestion);
+
+                Assert.AreEqual(createdQuestion.FirstNumber, reloadedQuestion.FirstNumber);
+                Assert.AreEqual(createdQuestion.SecondNumber, reloadedQuestion.SecondNumber);
+                Assert.AreEqual(createdQuestion.Answer, reloadedQuestion.Answer);
+                Assert.AreEqual(createdQuestion.Remainder, reloadedQuestion.Remainder);
+                Assert.AreEqual(createdQuestion.QuestionType, reloadedQuestion.QuestionType);
+                Assert.AreEqual(createdQuestion.QuestionState, reloadedQuestion.QuestionState);
             }
         }
 
