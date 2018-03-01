@@ -9,6 +9,6 @@ namespace MathematicalRESTTest.Models
     {
         Multiplication = 1,
         Division = 2,
-        DivisonWithRemainder = 3
+        DivisionWithRemainder = 3
     }
 }

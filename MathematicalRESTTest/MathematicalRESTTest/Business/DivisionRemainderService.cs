@@ -24,14 +24,16 @@ namespace MathematicalRESTTest.Business
         public void ScoreQuestions(IEnumerable<Question> questions)
         {
             //Only look at the questions relevant to this service
-            foreach (var question in questions.Where(a => a.QuestionType == QuestionType.DivisonWithRemainder))
+            foreach (var question in questions.Where(a => a.QuestionType == QuestionType.DivisionWithRemainder))
             {
                 var questionState = QuestionState.NotScored;
 
                 if (question.Answer.HasValue)
                 {
-                    var expectedResult = question.FirstNumber / question.SecondNumber;
-                    if (expectedResult == question.Answer && question.FirstNumber % question.SecondNumber == question.Remainder)
+                    var expectedResult = question.SecondNumber > 0 ? question.FirstNumber / question.SecondNumber : 0;
+                    var expectedRemainder = question.SecondNumber > 0 ? question.FirstNumber % question.SecondNumber : 0;
+
+                    if (expectedResult == question.Answer && expectedRemainder == question.Remainder)
                     {
                         questionState = QuestionState.Correct;   
                     }
@@ -71,7 +73,7 @@ namespace MathematicalRESTTest.Business
                     {
                         FirstNumber = firstNumber,
                         SecondNumber = secondNumber,
-                        QuestionType = QuestionType.DivisonWithRemainder
+                        QuestionType = QuestionType.DivisionWithRemainder
                     };
                 }
             }

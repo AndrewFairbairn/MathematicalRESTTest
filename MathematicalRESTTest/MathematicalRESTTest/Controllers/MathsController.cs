@@ -28,7 +28,7 @@ namespace MathematicalRESTTest.Controllers
 
         //GET: api/Maths/
         [ResponseType(typeof(QuestionSet))]
-        public IHttpActionResult GetQuestionSet()
+        public IHttpActionResult GetquestionSet()
         {
             var questions = new List<Question>();
 

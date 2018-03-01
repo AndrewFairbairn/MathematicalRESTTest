@@ -31,7 +31,8 @@ namespace MathematicalRESTTest.Business
 
                 if (question.Answer.HasValue)
                 {
-                    var expectedResult = question.FirstNumber / question.SecondNumber;
+                    var expectedResult = question.SecondNumber > 0 ? question.FirstNumber / question.SecondNumber : 0;
+
                     if (expectedResult == question.Answer)
                     {
                         questionState = QuestionState.Correct;
